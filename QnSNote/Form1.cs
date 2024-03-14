@@ -560,6 +560,17 @@ namespace QnSNote
                 streamWriter.Write(serialized);
             }
 
+            // Add to history
+            var historyFolderPath = "QnS_History";
+            Directory.CreateDirectory(historyFolderPath);
+
+            var dateTimeString = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            var historyFilePath = Path.Combine(historyFolderPath, $"QnS_{dateTimeString}.txt");
+            using (var streamWriter = new StreamWriter(historyFilePath))
+            {
+                streamWriter.Write(serialized);
+            }
+
             _lastSavedSerialization = serialized;
         }
 
